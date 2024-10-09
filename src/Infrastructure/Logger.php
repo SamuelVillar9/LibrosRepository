@@ -7,7 +7,7 @@ class Logger
     public function __construct($logFile = 'app.log')
     {
         // Definir la ruta de la carpeta Logs en la raíz del proyecto
-        $logDirectory = __DIR__ . '/../../Logs';  // Ajustar según la estructura de tu proyecto
+        $logDirectory = __DIR__ . '/../../Logs';
 
         // Crear la carpeta Logs si no existe
         if (!is_dir($logDirectory)) {

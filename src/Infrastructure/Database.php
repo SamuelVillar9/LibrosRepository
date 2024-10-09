@@ -9,7 +9,7 @@ class Database
         try {
             // Establecer conexión PDO
             $this->pdo = new PDO($dsn, $username, $password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Configurar para que lance excepciones
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Configurado para que lance excepciones
         } catch (PDOException $e) {
             // Manejo de excepciones en la conexión
             die("Error de conexión: " . $e->getMessage());

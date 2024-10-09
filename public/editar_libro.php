@@ -6,9 +6,9 @@ require_once '../src/Infrastructure/OpenLibraryClient.php';
 require_once '../src/Domain/Libro.php';
 
 // Inicializar dependencias
-$db = new Database('db', 'libros', 'user', 'password'); // Asegúrate de que estos parámetros son correctos
+$db = new Database('db', 'libros', 'user', 'password'); // Parámetros de la BBDD
 $libroRepository = new LibroRepository($db);
-$openLibraryClient = new OpenLibraryClient($db); // Pasar la instancia de Database aquí
+$openLibraryClient = new OpenLibraryClient($db);
 $libroController = new LibroController($libroRepository, $openLibraryClient);
 
 // Gestionar una solicitud para actualizar un libro tras el formulario de edición

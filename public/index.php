@@ -7,9 +7,9 @@ require_once '../src/Application/LibroController.php';
 require_once '../src/Domain/Libro.php';
 
 // Inicializar dependencias
-$db = new Database('db', 'libros', 'user', 'password'); // Asegúrate de que estos parámetros son correctos
+$db = new Database('db', 'libros', 'user', 'password'); // Parámetros de la BBDD
 $libroRepository = new LibroRepository($db);
-$openLibraryClient = new OpenLibraryClient($db); // Pasar la instancia de Database aquí
+$openLibraryClient = new OpenLibraryClient($db);
 $libroController = new LibroController($libroRepository, $openLibraryClient);
 
 // Inicializar resultados de búsqueda
