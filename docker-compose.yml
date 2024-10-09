@@ -1,20 +1,24 @@
-version: '3.8'
 services:
-  php:
-    build: .
+  php:  # Definir el contenedor PHP
+    build: .  # Construir la imagen usando el Dockerfile en el directorio actual
+    ports:
+      - "8008:80"  # Exponer el puerto 8012 en el host y redirigirlo al puerto 80 del contenedor
     volumes:
-      - .:/var/www/html
-    ports:
-      - "8080:80"
+      - .:/var/www/html  # Montar el directorio actual como volumen dentro del contenedor
     depends_on:
-      - db
+      - db  # Asegurar que el contenedor de MySQL esté activo antes de iniciar PHP
 
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: 
+  db:  # Definir el contenedor MySQL
+    image: mysql:5.7  # Usar la imagen oficial de MySQL versión 5.7
+    environment:  # Definir variables de entorno para configurar MySQL
+      MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: libros
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "3306:3306"  # Exponer el puerto 3306 para que MySQL sea accesible desde el host
+    volumes:
+      - db_data:/var/lib/mysql  # Crear un volumen para persistir los datos de la base de datos
+
+volumes:
+  db_data:  # Volumen para almacenar de forma persistente los datos de MySQL
