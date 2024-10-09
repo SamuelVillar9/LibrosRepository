@@ -11,15 +11,21 @@ class LibroRepository
     public function crear(Libro $libro)
     {
         $query = "INSERT INTO libros (libro_titulo, libro_autor, libro_isbn, libro_anio_publicacion, libro_descripcion, libro_portada) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute([
-            $libro->getTitulo(),
-            $libro->getAutor(),
-            $libro->getIsbn(),
-            $libro->getAnioPublicacion(),
-            $libro->getDescripcion(),
-            $libro->getPortada()
-        ]);
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([
+                $libro->getTitulo(),
+                $libro->getAutor(),
+                $libro->getIsbn(),
+                $libro->getAnioPublicacion(),
+                $libro->getDescripcion(),
+                $libro->getPortada()
+            ]);
+
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => 'Error al crear el libro: ' . $e->getMessage()];
+        }
     }
 
     public function actualizar(Libro $libro)
@@ -54,13 +60,13 @@ class LibroRepository
     }
 
     public function obtenerLibroPorIsbn($isbn)
-{
-    $query = "SELECT * FROM libros WHERE libro_isbn = :isbn";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute([':isbn' => $isbn]);
+    {
+        $query = "SELECT * FROM libros WHERE libro_isbn = :isbn";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([':isbn' => $isbn]);
 
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function borrarLibro($isbn)
     {

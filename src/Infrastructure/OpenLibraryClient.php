@@ -38,7 +38,7 @@ class OpenLibraryClient
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve un array asociativo
     }
 
-    // Obtener la descripción de un libro por su ISBN
+    // Obtener la descripción de un libro por su ISBN de la API
     public function obtenerDescripcionPorISBN($isbn)
     {
         // Inicializar cURL
@@ -80,7 +80,7 @@ class OpenLibraryClient
         }
     }
 
-    // Obtener la URL de la portada de un libro por su ISBN
+    // Obtener la URL de la portada de un libro por su ISBN la API
     public function obtenerPortadaPorISBN($isbn)
     {
         // Inicializar cURL
@@ -121,4 +121,5 @@ class OpenLibraryClient
             return '';
         }
     }
+
 }
